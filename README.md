@@ -10,6 +10,54 @@ Then ask your agent:
 
 > make a narration video explaining the Chinese idiom 胸有成竹
 
+## Prerequisites
+
+Install these before you ask for your first video.
+
+| tool | used for | check |
+|---|---|---|
+| [Node.js](https://nodejs.org) 18+ | `npx skills add` | `node -v` |
+| [bun](https://bun.sh) 1.1+ | runs the kit scripts | `bun -v` |
+| [ffmpeg](https://ffmpeg.org) (with `ffprobe`) | encoding video and audio | `ffmpeg -version` |
+| `jq`, `curl` | image generation script | `jq --version` |
+| Playwright Chromium | rendering frames | installed on first run |
+| An agent that supports skills | Claude Code, Codex, Cursor, … | |
+| Image API key | AI art for narration and promo videos | `echo $IMAGE_GEN_API_KEY` |
+
+Install commands:
+
+```bash
+# macOS
+brew install oven-sh/bun/bun ffmpeg jq
+
+# Debian / Ubuntu
+sudo apt install ffmpeg jq curl
+curl -fsSL https://bun.sh/install | bash
+
+# Windows: use WSL and follow the Ubuntu steps
+```
+
+On the first run, the agent installs the kit's dependencies inside the skill folder. You can also run it yourself:
+
+```bash
+cd <skill dir>/kit && bun install && bunx playwright install chromium
+# Linux may also need system libraries: bunx playwright install-deps chromium
+```
+
+**Image generation.** Set a key for any OpenAI-compatible `/images/generations` endpoint. Image calls bill to your own API account.
+
+```bash
+export IMAGE_GEN_API_KEY=sk-...
+export IMAGE_GEN_BASE_URL=https://api.openai.com/v1   # default
+export IMAGE_GEN_MODEL=gpt-image-1                    # default
+```
+
+Without a key you can still make `motion` videos and `promo`/`tutorial` videos built from screenshots. The agent asks before it falls back.
+
+**Optional:**
+- Background music with beat sync: [`yt-dlp`](https://github.com/yt-dlp/yt-dlp) and Python 3 with `numpy` and `scipy`.
+- Narration voice: needs internet access to Microsoft Edge's read-aloud service. No key needed.
+
 ## Example
 
 `examples/chengzhu/`: a 76 s narration video, made from one prompt.
@@ -37,21 +85,6 @@ Formats: vertical 1080×1920 (TikTok / Reels / Shorts) or 2560×1440 (YouTube). 
 2. It generates one illustration per scene with an image API.
 3. It builds the video as an HTML page where every frame depends only on time `t`: Ken Burns motion, kinetic text, captions.
 4. `render.ts` opens that page in headless Chromium, takes a screenshot of each frame at 30 fps, checks the layout (cropped text, dead air, empty cuts), then muxes the frames with the voice using ffmpeg.
-
-## Requirements
-
-- [bun](https://bun.sh), `ffmpeg`, `jq`, `curl`
-- Chromium for Playwright. The agent installs it on first run with `bun install && bunx playwright install chromium` inside the skill's `kit/` folder.
-- **Image generation** (narration and promo art): set `IMAGE_GEN_API_KEY`. The script works with any OpenAI-compatible `/images/generations` endpoint:
-
-  ```bash
-  export IMAGE_GEN_API_KEY=sk-...
-  export IMAGE_GEN_BASE_URL=https://api.openai.com/v1   # default
-  export IMAGE_GEN_MODEL=gpt-image-1                    # default
-  ```
-
-  Image calls bill to your own API account.
-- Optional: `yt-dlp` plus Python `numpy`/`scipy` for background music with beat sync.
 
 ## Configuration
 
