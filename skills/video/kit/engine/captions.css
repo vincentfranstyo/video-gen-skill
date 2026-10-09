@@ -1,0 +1,13 @@
+/* Burned-in captions drawn by the engine from the narration; above TikTok's bottom UI, clear of its right rail.
+   Font and colors follow the stage: set --caption-font, --caption-bg and --caption-now in stage.css. */
+.cc {
+  position: fixed; left: 50%; bottom: 19vh; transform: translateX(-50%); z-index: 50;
+  width: max-content; max-width: 78vw; text-align: center;
+  font-family: var(--caption-font, sans-serif); font-weight: 700; font-size: calc(5.2 * var(--u)); line-height: 1.15; letter-spacing: -0.01em;
+  color: #fff; padding: calc(1.2 * var(--u)) calc(2.6 * var(--u)); border-radius: calc(2.4 * var(--u));
+  background: var(--caption-bg, rgba(10, 10, 14, 0.62));
+}
+.cc:empty { display: none; }
+.cc span { display: inline-block; opacity: 0.55; margin: 0 0.14em; }
+.cc span.said { opacity: 1; }
+.cc span.now { opacity: 1; color: var(--caption-now, #ffd65a); }

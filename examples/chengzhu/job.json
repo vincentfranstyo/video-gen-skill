@@ -1,0 +1,33 @@
+{
+  "kind": "narration",
+  "format": "youtube",
+  "brief": "Narration explaining Chinese idiom 胸有成竹: meaning, Wen Tong bamboo story, usage",
+  "appUrl": null,
+  "look": {
+    "colors": {
+      "background": "#1b1a17",
+      "ink": "#2a2622",
+      "accent": "#a8321e",
+      "pop": "#2f5d50",
+      "card": "rgba(246,238,220,0.9)"
+    },
+    "fonts": [
+      "Noto Serif SC",
+      "Cormorant Garamond",
+      "Inter"
+    ]
+  },
+  "music": null,
+  "checks": {
+    "maxGapSeconds": 1.6,
+    "narration": true
+  },
+  "direction": {
+    "seed": 1791528247650,
+    "kind": "narration",
+    "structure": "chronological: open on the most striking moment, then tell it in order",
+    "hook": "question: 'Why Did <thing> Happen?'",
+    "motion": "slow Ken Burns pans and zooms over illustrations, soft crossfades",
+    "bpm": 88
+  }
+}

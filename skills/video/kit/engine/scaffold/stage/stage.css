@@ -1,0 +1,22 @@
+:root {
+  --background: #111;
+  --ink: #fafafa;
+  --accent: #ffd65a;
+  --font: "Inter", sans-serif;
+  --caption-font: var(--font);
+  --u: calc(min(100vw, 100vh) / 100);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100vw; height: 100vh; overflow: hidden; background: var(--background); color: var(--ink); font-family: var(--font); -webkit-font-smoothing: antialiased; }
+
+.display { font-weight: 700; letter-spacing: -0.03em; line-height: 0.95; }
+.accent { color: var(--accent); }
+[data-in] { display: inline-block; opacity: 0; will-change: transform, opacity, filter; }
+
+.scene { position: absolute; inset: 0; display: none; align-items: center; justify-content: center; }
+.inner { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: calc(3 * var(--u)); will-change: transform, filter, opacity; }
+.headline { font-size: calc(14 * var(--u)); }
+body.tt .headline { max-width: 90vw; }
+
+.cta { font-size: calc(5 * var(--u)); padding: calc(2 * var(--u)) calc(4 * var(--u)); border-radius: 999px; background: var(--ink); color: var(--background); }
